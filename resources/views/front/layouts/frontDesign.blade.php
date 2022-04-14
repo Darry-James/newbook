@@ -61,7 +61,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@5.2.0/tinymce.min.js"></script>
+    <script src="{{asset('/tinymce-bootstrap-plugin/plugin/plugin.min.js')}}"></script>
+    {{-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> --}}
     <!-- <script src="https://cdn.tiny.cloud/1/s63i07jv6zzmjbvh1jnemybwthrhjcju5p3n1jsagq3wsp25/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
     
 
@@ -69,7 +71,7 @@
 
 
    
-    <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
+    {{-- <script src="{{asset('/ckeditor/ckeditor.js')}}"></script> --}}
   
 
     <script src="{{asset('/front/js/main.js')}}"></script>

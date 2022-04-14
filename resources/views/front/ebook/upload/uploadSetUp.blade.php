@@ -86,7 +86,7 @@
                         <div class="label">DESCRIPTION (OPTIONAL)</div>
                         <div class="editor-wrap mb-4">
                             {{-- <div id="editor" name="description"></div> --}}
-                            <textarea class="ckeditor w-100" name="description" id="" cols="30" rows="10">{{ \Session::get('description') ? \Session::get('description') : '' }}</textarea>
+                            <textarea class="tinymce w-100" name="description" id="" cols="30" rows="10">{{ \Session::get('description') ? \Session::get('description') : '' }}</textarea>
                             @if ($errors->has('description')) <p class="help-block" style="color:red; position: relative; top:0px;">{{ $errors->first('description') }}</p> @endif
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                         <div class="label"> SUMMARY (OPTIONAL)</div>
                         <div class="editor-wrap mb-4">
                             {{-- <div id="pop-editor" name="summary"></div> --}}
-                            <textarea class="ckeditor w-100" name="summary" id="" cols="30" rows="10">{{ \Session::get('summary') ? \Session::get('summary') : '' }}</textarea>
+                            <textarea class="tinymce w-100" name="summary" id="" cols="30" rows="10">{{ \Session::get('summary') ? \Session::get('summary') : '' }}</textarea>
                             @if ($errors->has('summary')) <p class="help-block" style="color:red; position: relative; top:0px;">{{ $errors->first('summary') }}</p> @endif
                         </div>
                     </div>
@@ -236,6 +236,51 @@
 
   @include('front.js_files.eBookJsHandler')
 
+{{-- tinymce --}}
+<script>
+    if (typeof (base_url) == "undefined") {
+        var base_url = location.protocol + '//' + location.host + '/';
+
+        const LOCAL_DOMAINS = ["localhost", "127.0.0.1", 'tinymce-bootstrap-plugin-scratch'];
+        if (LOCAL_DOMAINS.includes(window.location.hostname)) {
+            var tbpKey = 'C7vK2sYsnBjWACO5HfhkUBM0TMFG/lpLmygKNmr4C7Og3bsDpECFRL3Wf4RNZYFciQkdCsUsafww20uhILXTGw==';
+        } else {
+            var tbpKey = 'production-key-here';
+        }
+    }
+    // uncomment the following line to test if your key is properly set
+    //console.log(tbpKey);
+    tinymce.init({
+        selector: 'textarea.tinymce',
+        plugins: 'advlist autolink bootstrap link image lists charmap print preview help table',
+        toolbar: [
+        'undo redo | bootstrap',
+        'cut copy paste | styleselect | alignleft aligncenter alignright alignjustify | bold italic | link image | preview | help'],
+        contextmenu: "link image imagetools table spellchecker | bootstrap",
+        file_picker_types: 'file image media',
+        bootstrapConfig: {
+            url: base_url + 'tinymce-bootstrap-plugin/plugin/',
+            iconFont: 'fontawesome5',
+            imagesPath: '/demo/demo-images',
+            key: tbpKey
+        },
+        formats: {
+        alignleft: {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'text-left'},
+        aligncenter: {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'text-center'},
+        alignright: {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'text-right'},
+        alignjustify: {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'text-justify'},
+        bold: {inline : 'strong'},
+        italic: {inline : 'em'},
+        underline: {inline : 'u'},
+        sup: {inline : 'sup'},
+        sub: {inline : 'sub'},
+        strikethrough: {inline : 'del'}
+        },
+        style_formats_autohide: true
+    });
+</script>
+
+
   <script>
       var regenerateBtn = $('#regenerateBtn'),
           setupForm = $('#setupForm');
@@ -282,11 +327,6 @@
       }
   </script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.ckeditor').ckeditor();
-    });
-</script>
 
   <script>
       var mediaModal = $('#media-modal'),

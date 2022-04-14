@@ -342,7 +342,6 @@ trait Generics{
             return redirect()->route('library');
         }
         
-    
         Alert::success('Ebook PDF Generated Successfully', '');
         return redirect()->route('library');
     }

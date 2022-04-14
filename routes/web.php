@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/tinyBs', function(){
+    return view('tinymceBootstrap');
+});
+
 Route::prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
     Route::get('/ecovers', [App\Http\Controllers\AdminController::class, 'adminEcovers'])->name('adminEcovers');

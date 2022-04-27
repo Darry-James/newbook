@@ -731,6 +731,15 @@ class EbookController extends Controller
             }
         }
     }
+
+    public function deleteSelectedChapter (Request $request)
+    {
+       $data = $request->all();
+       $selectedChapter = SelectedChapter::find($data['chapter_id']);
+       $selectedChapter->delete();
+       return response()->json(['message' => 'Removed Successfully', 'status'=>201]);
+        
+    }
     /**
      * Remove the specified resource from storage.
      *

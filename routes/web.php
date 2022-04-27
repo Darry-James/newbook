@@ -87,7 +87,8 @@ Route::prefix('ebook')->group(function () {
     Route::get('/articleSetUp', [App\Http\Controllers\EbookController::class, 'articleSetUp'])->name('articleSetUp');
     Route::post('/articleSetUp', [App\Http\Controllers\EbookController::class, 'articleSetUpPost'])->name('articleSetUpPost');
     
-    Route::get('/deleteArticleSelect/{id}', [App\Http\Controllers\EbookController::class, 'deleteArticleSelect'])->name('deleteArticleSelect');
+    //Route::get('/deleteArticleSelect/{id}', [App\Http\Controllers\EbookController::class, 'deleteArticleSelect'])->name('deleteArticleSelect');
+    Route::get('/deleteSelectedChapter', [App\Http\Controllers\EbookController::class, 'deleteSelectedChapter'])->name('deleteSelectedChapter');
     
 
     //by manual

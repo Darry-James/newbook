@@ -5763,7 +5763,7 @@
                                                     </li>
 
                                                     <li class="nav-item">
-                                                        <a class="nav-link px-1" target="_blank" href="{{ route('deleteArticleSelect', $chapter->id) }}" data-toggle="tooltip" data-placement="top" title="" onclick="return confirm('Are you sure you wish to delete this Chapter?');" data-original-title="Delete">
+                                                        <a class="nav-link px-1" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" onclick="deleteSelectedChapter({{$chapter->id}})" data-original-title="Delete">
                                                             <img src="../assets/icons/try/funnel project svg/ic_cancel_24px.svg" alt="">
                                                         </a>
                                                     </li>
@@ -5987,6 +5987,18 @@
     }
     // console.log($page_numbering);
 </script>
+
+<script>
+    function deleteSelectedChapter($chapter_id){
+        if(!confirm("Are you sure you want to remove this chapter?")){
+            console.log($chapter_id);
+            return false;
+        }
+        console.log($chapter_id);
+    }
+</script>
+
+
 
 @endsection
 

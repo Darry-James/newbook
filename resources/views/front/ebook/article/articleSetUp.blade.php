@@ -5989,12 +5989,35 @@
 </script>
 
 <script>
-    function deleteSelectedChapter($chapter_id){
+    function deleteSelectedChapter(chapter_id){
         if(!confirm("Are you sure you want to remove this chapter?")){
-            console.log($chapter_id);
             return false;
         }
-        console.log($chapter_id);
+        //console.log($chapter_id);
+        
+        $.ajax({
+           type:'GET',
+           url:"{{ route('deleteSelectedChapter') }}",
+           data:{chapter_id:chapter_id},
+           success: function(resp){
+				console.log(resp);							
+                if (resp.status == 201) {
+                        
+                    swal.fire('Success', 'Chapter Removed Successfully', 'success');
+
+                        setTimeout(function(){
+                            window.location.reload();
+                        },2000);
+                         
+                    } else {
+                        swal.fire('Error', 'Server Error', 'error');
+                    }
+                console.log("success");
+        
+                },error:function(){
+                    swal.fire('Error', 'Something Went Wrong', 'error');
+                }
+        });
     }
 </script>
 

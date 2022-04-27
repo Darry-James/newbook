@@ -318,9 +318,19 @@ class EbookController extends Controller
         } else {
 
             $result = $this->fetchArticlesFromUrl($data['site_url']);
-            Session::put('site_url', $result['url']);
-            Session::put('site_title', $result['title']);
-            Session::put('site_author', $result['author'][0]);
+            // $result = [
+                	
+            //     'url'=>"https://www.xyz.com",
+            //     'status'=>"COMPLETE",
+            //     'status_code'=>200,
+            //     'domain'=>"www.xyz.com",
+            //     'title'=>"\"Time is not on our side\" WHO confirms Ebola outbreak in Africa after second person dies from the disease",
+            //     'author'=>[],
+            // ];
+            !empty($result['url']) ? Session::put('site_url', $result['url']) : Session::put('site_url', "");
+            !empty($result['title']) ? Session::put('site_title', $result['title']) : Session::put('site_title', "");
+            !empty($result['author']) ? Session::put('site_author', $result['author'][0]) : Session::put('site_author', "");
+            // Session::put('site_author', $result['author'][0]);
 
             $html = $result['html'];
             $scriptlessHtml = $this->removeTags($html, 'script');
@@ -364,6 +374,8 @@ class EbookController extends Controller
         }
         if (Session::get('site_author')) {
             $site_author = Session::get('site_author');
+        } else {
+            $site_author = 'the author';
         }
         //preg_match('/<div class="article-title-outer">(.*?)<\/div>/s', $htmlContent, $titleArray);
         
@@ -390,6 +402,8 @@ class EbookController extends Controller
         }
         if (Session::get('site_author')) {
             $site_author = Session::get('site_author');
+        } else {
+            $site_author = 'the author';
         }
       $url_articles = Session::get('url_articles');
       $site_url = Session::put('site_url',$data['site_url']);
